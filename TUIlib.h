@@ -16,10 +16,25 @@ using namespace std;
 
 class ConsoleWidget 
 {
+	private:
+			struct Poit{
+					unsigned int Y;
+					unsigned int X;
+			};
+			
+			struct startPoint;
 	// code it after, abstract class used just for polymorphism 
 };
 
+class Split : public ConsoleWidget
+{
+	// need for split stdscr
+};
+
 // TODO: controller //
+// Controller will create splits
+// 
+
 class ConsoleController
 {
 	private:
@@ -34,14 +49,9 @@ class ConsoleController
 };
 
 
-class Split : public ConsoleWidget
-{
-	// need for split stdscr
-};
-
 class Panel : public ConsoleWidget
 {
-	// TODO: vector of Horisontal Split
+	// TODO: vector of Splits
 };
 
 class Window: public ConsoleWidget // TODO: modalWindow
