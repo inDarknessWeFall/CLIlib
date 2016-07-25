@@ -48,9 +48,7 @@ class Window: public ConsoleWidget // TODO: modalWindow
 {
 	private:
 			WINDOW* currentWindow;
-			unsigned int maxY;
-			unsigned int maxX;
-		
+	
 			inline void createBorder();		
 			inline void GetWindowProperties();
 		
