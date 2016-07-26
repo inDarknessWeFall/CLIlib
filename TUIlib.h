@@ -8,91 +8,28 @@
  * @param
  */
 
+////////////////
+// Using TDD  //
+////////////////
+
 #include <ncurses.h>
-#include <vector>
+
+#define length 24
 
 using namespace std;
 
-
-class ConsoleWidget 
-{
-	private:
-			struct Poit{
-					unsigned int Y;
-					unsigned int X;
-			};
-			
-			struct startPoint;
-	// code it after, abstract class used just for polymorphism 
-};
-
-class Split : public ConsoleWidget
-{
-	// need for split stdscr
-};
-
-// TODO: controller //
-// Controller will create splits
-// 
-
-class ConsoleController
-{
-	private:
-			WINDOW* screen;
-			vector<ConsoleWidget> allWidgets;
-			void update();
-						
-	public:
-			void deleteWidget();
-			void addWidget();
-
-};
-
-
-class Panel : public ConsoleWidget
-{
-	// TODO: vector of Splits
-};
-
-class Window: public ConsoleWidget // TODO: modalWindow
+class Window
 {
 	private:
 			WINDOW* currentWindow;
-	
-			inline void createBorder();		
-			inline void GetWindowProperties();
-		
+			WINDOW* createNewWindow(const int& height, const int& width, const int& startY, const int& startX);
+			inline void update();
+			char title[length];
+
 	public:
 			Window();
-
-};
-
-class ModalWindow : public Window
-{
-	private:
-		char[] title;
-		void setTitle;	
-};
-
-// Description:
-// Further will be items (buttons, labels, menu, scrollbar maybe)
-
-class Button : public ConsoleWidget
-{
-// TODO:
-};
-
-class Label : public ConsoleWidget
-{
-		
-};
-
-class Radiobutton : public ConsoleWidget
-{
-		
-};
-
-class Checkbox : public ConsoleWidget
-{
-
+			~Window();
+			void setTitle(char title[length]);			
+			void createFrame();
+			WINDOW* returnWINDOW();
 };
