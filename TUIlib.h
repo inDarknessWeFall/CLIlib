@@ -18,16 +18,30 @@
 
 using namespace std;
 
-class Window
+class CWidget
+{
+/////////////////
+// Main class  //
+/////////////////
+		private:
+				struct Point
+				{
+						unsigned int Y;
+						unsigned int X;
+				};
+
+};
+
+class Window : public CWidget
 {
 	private:
 			WINDOW* currentWindow;
-			WINDOW* createNewWindow(const int& height, const int& width, const int& startY, const int& startX);
+			WINDOW* createNewWindow(const int& height = 0, const int& width = 0, const int& startY = 0, const int& startX = 0);
 			inline void update();
 			char title[length];
 
 	public:
-			Window();
+			Window(const int& height, const int& width, const int& startY, const int& startX);
 			~Window();
 			void setTitle(char title[length]);			
 			void createFrame();

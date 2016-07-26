@@ -3,7 +3,6 @@
 WINDOW* Window::createNewWindow(const int& height, const int& width, const  int& startY, const int& startX)
 {
 		WINDOW* local = newwin(height,width,startY,startX);
-		printf("Created new window\n");
 		return local;
 }
 
@@ -19,18 +18,17 @@ void Window::createFrame()
 		update();
 }
 
-Window::Window()
+Window::Window(const int& height = 0, const int& width = 0, const int& startY = 0, const int& startX = 0)
 {
-		currentWindow = createNewWindow(10,20,5,5);
+		currentWindow = createNewWindow(height,width,startY,startX);
 }
 
 Window::~Window()
 {
 		delwin(currentWindow);
-		printf("Window was deleted successfully!\n");
 }
 
 void Window::setTitle(char title[length])
 {
-		
+	
 }
