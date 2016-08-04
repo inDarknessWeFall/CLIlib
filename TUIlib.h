@@ -57,7 +57,9 @@ class CController // Mayer's singleton
 			unsigned int screenHeight;
 			unsigned int screenWidth;
 			unsigned int blockHeight;
-		    unsigned int blockWidth;	
+		  	unsigned int blockWidth;	
+			std::vector<CWindow*> keeper;	
+
 	public:
 			static CController& startSession();
 			~CController();
