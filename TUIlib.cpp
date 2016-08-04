@@ -57,10 +57,21 @@ CController::CController(const unsigned int& screenHeight,const unsigned int& sc
 		this->blockWidth = blockWidth;
 }
 
+void CController::initializeSession()
+{
+	initscr();
+}
+
+void CController::setNoCursor()
+{
+	curs_set(0);
+}
+
 CController& CController::startSession()
 {
 		printf("Session was started\n");
-		initscr();	
+		initializeSession();
+		setNoCursor();
 		int screenSizeY, screenSizeX;
 		getmaxyx(stdscr, screenSizeY, screenSizeX);
 		static CController instance(screenSizeY, screenSizeX, screenSizeY/BlocksPerColumn, screenSizeX/BlocksPerRow);

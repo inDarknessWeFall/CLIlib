@@ -8,10 +8,6 @@
  * @param
  */
 
-////////////////
-// Using TDD  //
-////////////////
-
 #define BlocksPerColumn 20
 #define BlocksPerRow 20
 
@@ -22,12 +18,12 @@
 class CWidget
 {
 	protected:
-				struct Point
+			struct Point
 				{
-						unsigned int Y;
-						unsigned int X;
+					unsigned int Y;
+					unsigned int X;
 				};
-				Point startPoint;
+			Point startPoint;
 };
 
 
@@ -59,6 +55,9 @@ class CController // Mayer's singleton
 			unsigned int blockHeight;
 		  	unsigned int blockWidth;	
 			std::vector<CWindow*> keeper;	
+
+			inline static void initializeSession();
+			inline static void setNoCursor();
 
 	public:
 			static CController& startSession();
