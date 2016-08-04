@@ -1,37 +1,36 @@
 #include "TUIlib.h"
 
-WINDOW* Window::createNewWindow(const int& height, const int& width, const  int& startY, const int& startX)
+WINDOW* CWindow::createNewWindow(const unsigned int& height, const unsigned int& width, const unsigned int& startY, const unsigned int& startX)
 {
-		WINDOW* local = newwin(height,width,startY,startX);
-		return local;
+		return newwin(height,width,startY,startX);
 }
 
-void Window::update()
+void CWindow::update()
 {
 		wrefresh(currentWindow);
 }
 
-void Window::createFrame()
+void CWindow::createFrame()
 {
 		box(currentWindow,0,0);
 		touchwin(currentWindow);
 		update();
 }
 
-Window::Window(const int& height = 0, const int& width = 0, const int& startY = 0, const int& startX = 0)
+CWindow::CWindow(const unsigned int& height, const unsigned int& width, const unsigned int& startY = 0, const unsigned int& startX = 0)
 {
 		startPoint.Y = startY;
 		startPoint.X = startX;
 		currentWindow = createNewWindow(height,width,startY,startX);
-		getmaxyx(currentWindow, maxY,maxX);
+		getmaxyx(currentWindow,this->height, this->width);
 }
 
-Window::~Window()
+CWindow::~CWindow()
 {
 		delwin(currentWindow);
 }
 
-void Window::printTitle(unsigned int point, const char* title)
+void CWindow::printTitle(const unsigned int& point, const char* title)
 {
 		mvwaddch(currentWindow, 0, point, ACS_RTEE);
 		waddch(currentWindow, ' ');
@@ -42,10 +41,39 @@ void Window::printTitle(unsigned int point, const char* title)
 		wrefresh(currentWindow);
 }
 
-void Window::setTitle(const char* title)
+void CWindow::setTitle(const char* title)
 {
 		this->title = title;
 		unsigned int stringSize = 4 + strlen(title);		
-		unsigned int temp = (maxX - stringSize)/2;
+		unsigned int temp = (width - stringSize)/2;
 		printTitle(temp,title);
+}
+
+CController::CController(const unsigned int& screenHeight,const unsigned int& screenWidth, const unsigned int& blockHeight, const unsigned int& blockWidth)
+{
+		this->screenHeight = screenHeight;
+		this->screenWidth = screenWidth;
+		this->blockHeight = blockWidth;
+		this->blockWidth = blockWidth;
+}
+
+CController& CController::startSession()
+{
+		printf("Session was started\n");
+		initscr();	
+		int screenSizeY, screenSizeX;
+		getmaxyx(stdscr, screenSizeY, screenSizeX);
+		static CController instance(screenSizeY, screenSizeX, screenSizeY/BlocksPerColumn, screenSizeX/BlocksPerRow);
+		return instance;
+}
+
+CController::~CController()
+{
+		endwin();
+		printf("Session was stopped\n");
+}
+
+CWindow* CController::createWindow(const unsigned int& sizeBlockY, const unsigned int& sizeBlockX, const unsigned int& startBlockY, const unsigned int& startBlockX)
+{
+	return new CWindow(sizeBlockY*blockHeight, sizeBlockX*blockWidth, startBlockY*blockHeight, startBlockX*blockWidth);	
 }

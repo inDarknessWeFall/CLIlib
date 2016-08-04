@@ -12,15 +12,16 @@
 // Using TDD  //
 ////////////////
 
+#define BlocksPerColumn 20
+#define BlocksPerRow 20
+
 #include <ncurses.h>
-#include <string.h>
+#include <cstring>
+#include <vector>
 
 class CWidget
 {
-/////////////////
-// Main class  //
-/////////////////
-		protected:
+	protected:
 				struct Point
 				{
 						unsigned int Y;
@@ -29,21 +30,36 @@ class CWidget
 				Point startPoint;
 };
 
-class Window : public CWidget
+
+class CWindow : public CWidget
 {
 	private:
 			WINDOW* currentWindow;
 			const char* title;
-			int maxY;
-			int maxX;
+			unsigned int height;
+			unsigned int width;
 
-			WINDOW* createNewWindow(const int& height = 0, const int& width = 0, const int& startY = 0, const int& startX = 0);
+			inline WINDOW* createNewWindow(const unsigned int& height, const unsigned int& width, const unsigned int& startY = 0, const unsigned int& startX = 0);
 			inline void update();
-			inline void printTitle(unsigned int point, const char* title);
+			inline void printTitle(const unsigned int& point, const char* title);
 	public:
-			Window(const int& height, const int& width, const int& startY, const int& startX);
-			~Window();
+			CWindow(const unsigned int& height, const unsigned int& width, const unsigned int& startY, const unsigned int& startX);
+			~CWindow();
 			void setTitle(const char* title);			
 			void createFrame();
-			WINDOW* returnWINDOW();
+};
+
+
+class CController // Mayer's singleton
+{
+	private:			
+			CController(const unsigned int& screenHeight,const unsigned int& screenWidth, const unsigned int& blockHeight, const unsigned int& blockWidth);
+			unsigned int screenHeight;
+			unsigned int screenWidth;
+			unsigned int blockHeight;
+		    unsigned int blockWidth;	
+	public:
+			static CController& startSession();
+			~CController();
+			CWindow* createWindow(const unsigned int& sizeBlockY, const unsigned int& sizeBlockX, const unsigned int& startBlockY, const unsigned int& startBlockX);
 };
