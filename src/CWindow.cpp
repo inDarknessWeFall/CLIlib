@@ -53,3 +53,20 @@ void CWindow::setCursor()
 {
 	curs_set(1);
 }
+
+void CWindow::cleanScreen()
+{
+	int y, x, maxy, maxx;
+	getmaxyx(currentWindow, maxy, maxx);
+		for(y=0; y < maxy; y++)
+		for(x=0; x < maxx; x++)
+			mvwaddch(currentWindow, y, x, ' ');
+}
+
+void CWindow::setColorScheme(const int& frontColor, const int& backgroundColor)
+{
+				init_pair(1, 1, 5);
+				wattrset(currentWindow, COLOR_PAIR(1));
+				cleanScreen();
+				wrefresh(currentWindow);
+}

@@ -1,3 +1,4 @@
+#include <iostream>
 #include "src/CLIlib.h"
 
 int main(int argc, char *argv[])
@@ -7,9 +8,9 @@ int main(int argc, char *argv[])
 	CWindow* s = contr.createWindow(3,3,0,0);
 	s->createFrame();
 	s->setTitle("Fuck this system");
-	s->setCursor();
-
 
 	getchar();
+
+
 	return 0;
 }

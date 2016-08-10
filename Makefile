@@ -6,6 +6,8 @@ CFLAGS=-c
 CCONTROLLER=CController.o
 CWINDOW=CWindow.o
 
+PROJECTFILE=main.cpp
+
 all: project
 
 $(CCONTROLLER): src/CController.cpp
@@ -14,8 +16,8 @@ $(CCONTROLLER): src/CController.cpp
 $(CWINDOW): src/CWindow.cpp
 	$(CC) $(CFLAGS) src/CWindow.cpp $(GRAPHICLIB)
 
-project: $(CCONTROLLER) $(CWINDOW)
-	$(CC) main.cpp $(CCONTROLLER) $(CWINDOW) $(OUTPUT) main $(GRAPHICLIB)
+project: $(CCONTROLLER) $(CWINDOW) $(PROJECTFILE) 
+	$(CC) $(PROJECTFILE) $(CCONTROLLER) $(CWINDOW) $(OUTPUT) project $(GRAPHICLIB)
 
 clean:
-	rm -rf *.o project main
+	rm -rf *.o project 
