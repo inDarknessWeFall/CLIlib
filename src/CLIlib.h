@@ -60,7 +60,7 @@ class CWindow : public CWidget
 			void setTitle(const char* title);			
 			void createFrame();
 			void setCursor();
-			void setColorScheme(const int& frontColor, const int& backgroundColor);
+			void setColorScheme(const int& colorScemeNumber);
 };
 
 

@@ -63,10 +63,9 @@ void CWindow::cleanScreen()
 			mvwaddch(currentWindow, y, x, ' ');
 }
 
-void CWindow::setColorScheme(const int& frontColor, const int& backgroundColor)
+void CWindow::setColorScheme(const int& colorScemeNumber)
 {
-				init_pair(1, 1, 5);
-				wattrset(currentWindow, COLOR_PAIR(1));
+				wattrset(currentWindow, COLOR_PAIR(colorScemeNumber));
 				cleanScreen();
 				wrefresh(currentWindow);
 }

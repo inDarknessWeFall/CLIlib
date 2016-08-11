@@ -14,6 +14,14 @@ CController::CController(const unsigned int& screenHeight,const unsigned int& sc
 void CController::initializeSession()
 {
 		initscr();
+		if(!has_colors())
+		{
+						// TODO: NoColorExeption
+		}
+		else
+		{
+						start_color();
+		}
 }
 
 void CController::setNoCursor()
@@ -60,7 +68,8 @@ int CController::getColorScheme(const int& forwardColor, const int& backgroundCo
 		it = colorScemes.find(newPair);
 		if(it == colorScemes.end())
 		{
-				init_pair(++amountOfColorSchemes, forwardColor, backgroundColor);
+				amountOfColorSchemes++;
+				init_pair(amountOfColorSchemes, forwardColor, backgroundColor);
 				colorScemes.insert(std::pair<std::pair<int,int>, unsigned int >(newPair,amountOfColorSchemes));
 		}
 		return amountOfColorSchemes;
